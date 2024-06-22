@@ -1,5 +1,5 @@
 -- Assign attribute name to a variable
-SET @attributeName = 'Total Cellphone Banking'; 
+SET @attributeName = 'Total Cellphone Banking';
 
 -- Assign project name to a variable
 SET @projectName = 'Cellphone Banking';
@@ -27,8 +27,8 @@ FROM `Fact_Result`
 
 -- Join with Fact_Result_Answer to get the answers for each result
 INNER JOIN `Fact_Result_Answer` 
-   ON (`Fact_Result`.`Result_ID` = `Fact_Result_Answer`.`Result_ID`) 
-   AND (`Fact_Result_Answer.Question_Name = @QuestionName`)
+   ON ( `Fact_Result`.`Result_ID`= `Fact_Result_Answer`.`Result_ID`) 
+   AND (Fact_Result_Answer.Question_Name = @QuestionName)
 
 -- Join with Dim_Question to get question details
 INNER JOIN `Dim_Question`  
@@ -38,13 +38,13 @@ INNER JOIN `Dim_Question`
 INNER JOIN `Dim_Survey`  
    ON (`Fact_Result`.`Survey_ID` = `Dim_Survey`.`Survey_ID`)
 
--- Filter the results based on date range and survey/question names
+-- Filter the results based on date range, survey name, and question name
 WHERE (
    DATE(`Fact_Result`.`DateTime_Created_Result`) BETWEEN 
    DATE_FORMAT(CURRENT_DATE - INTERVAL 1 MONTH, '%Y-%m-01 00:00:00')  -- Start of last month
    AND LAST_DAY(CURRENT_DATE - INTERVAL 1 MONTH) + INTERVAL '23:59:59' HOUR_SECOND  -- End of last month
-   AND `Dim_Survey`.`Survey_Name` = @SurveyName                         -- Filter by survey name
-   AND `Dim_Question`.`Question_Name` = @QuestionName                   -- Filter by question name
+   AND `Dim_Survey`.`Survey_Name` = @SurveyName                          -- Filter by survey name
+   AND `Dim_Question`.`Question_Name` = @QuestionName                    -- Filter by question name
 )
 
 -- Group by the last day of the month to aggregate results per month
