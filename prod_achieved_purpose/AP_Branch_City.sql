@@ -52,7 +52,7 @@ SELECT
       WHEN Dim_RE_Group.RE_Group_Name IN ('Western Cape Province') THEN 'Western Cape'
       WHEN Dim_RE_Group.RE_Group_Name IN ('Lm:Zululand') THEN 'Zululand'
       ELSE CAST( Dim_RE_Group.RE_Group_Name AS char )
-   END AS attribute_name,
+   END AS attribute,
    'Branch' AS project,
 	   CASE
 			WHEN Dim_RE_Group.RE_Group_Name = 'Lm:Boland West Coast' THEN 'Achieved Purpose: Western Cape'
