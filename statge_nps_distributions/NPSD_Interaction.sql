@@ -1,4 +1,3 @@
-SET @attributeName = 'Total ATM' ; 
 SET @projectName = 'ATM'; 
 SET @reportName = 'Experience Rating: Provincial'; 
 SET @SurveyName = 'Standard Bank Branch SMS'; 
@@ -8,8 +7,8 @@ SET @Filter_Value = 'MIDDLE MARKET'; -- Interaction Filter Value
 
 SET @sql = CONCAT('
 SELECT
-    LAST_DAY(Fact_Result.DateTime_Created_Result) AS date,
-    "', @attributeName, '" AS attribute,
+    LAST_DAY(Fact_Result.DateTime_Created_Result) AS month,
+   
     "', @projectName, '" AS project,
     "', @reportName, '" AS report_name,
         COUNT((CASE WHEN `Fact_Result_Answer`.`Answer_Numeric_Value` < 7 THEN 1 END)) / COUNT(`Fact_Result_Answer`.`Answer_Numeric_Value`) * 100 AS detractor,
@@ -17,8 +16,8 @@ SELECT
 	    COUNT((CASE WHEN `Fact_Result_Answer`.`Answer_Numeric_Value` > 8 THEN 1 END)) / COUNT(`Fact_Result_Answer`.`Answer_Numeric_Value`) * 100 AS promoters,
 	   (COUNT((CASE WHEN `Fact_Result_Answer`.`Answer_Numeric_Value` > 8 THEN 1 END)) - COUNT((CASE WHEN `Fact_Result_Answer`.`Answer_Numeric_Value` < 7 THEN 1 END))) 
 	   / COUNT(`Fact_Result_Answer`.`Answer_Numeric_Value`) * 100 AS nps,
-	    COUNT(Fact_Result.Result_ID) AS count,
-    0 AS sort_order
+	    COUNT(Fact_Result.Result_ID) AS count
+    
 FROM
     Fact_Result
 INNER JOIN Fact_Result_Answer ON Fact_Result.Result_ID = Fact_Result_Answer.Result_ID
