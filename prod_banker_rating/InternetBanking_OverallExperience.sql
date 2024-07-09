@@ -1,3 +1,5 @@
+-- Can Parameterize 
+
 SELECT 
    LAST_DAY(`Fact_Result`.`DateTime_Created_Result`) AS date,
    `Dim_Question`.`Question_Name` AS attribute,
