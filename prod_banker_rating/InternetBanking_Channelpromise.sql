@@ -1,3 +1,6 @@
+-- Don't Parameterize 
+
+
 SELECT 
    LAST_DAY(Fact_Result.DateTime_Created_Result) AS Date,
    CASE
