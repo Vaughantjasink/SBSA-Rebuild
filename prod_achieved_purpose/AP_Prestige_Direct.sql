@@ -1,3 +1,5 @@
+-- Can be parameterized
+
 SELECT 
    LAST_DAY(Fact_Result.DateTime_Created_Result) AS date,      
     'Prestige Direct CST' AS attribute,                                   
